@@ -42,7 +42,6 @@ const resolve = (story) => {
           result[chapterName].push({
             choice: {}
           })
-          result[chapterName + `_e`] = []
         } else {
           storyLine[(stringOccurrence(line, `> `) + 1) / 2]++
         }
@@ -58,7 +57,22 @@ const resolve = (story) => {
         }
         if (occurrence === storyLine.length) {
           result[chapterName].push(analyzeLine(line))
-        } else {}
+        } else {
+          let endChapter = []
+          let j
+          for (j = 0; j < occurrence; j++) {
+            endChapter.push(storyLine[j])
+          }
+          endChapter[endChapter.length - 1]++
+          storyLine = endChapter
+          chapterName = `_${storyLine.join(`_`)}`
+          if (result[chapterName] === undefined) {
+            result[chapterName] = [{
+              mark: chapterName
+            }]
+          }
+          result[chapterName].push(analyzeLine(line))
+        }
       }
     }
   }
