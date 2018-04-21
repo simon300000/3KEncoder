@@ -52,7 +52,9 @@ const resolve = (story) => {
           choice.pop()
         }
       } else {
-
+        while (stringOccurrence(line, `> `)) {
+          line = line.replace(`> `, ``)
+        }
       }
     }
   }
