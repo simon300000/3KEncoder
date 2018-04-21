@@ -18,5 +18,20 @@
   "homepage": "https://github.com/simon300000/3KEncoder#readme",
   "dependencies": {
     "level": "^3.0.0"
+  },
+  "eslintConfig": {
+    "root": true,
+    "parserOptions": {},
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "standard"
+    ],
+    "plugins": [],
+    "rules": {
+      "space-before-function-paren": "off",
+      "generator-star-spacing": "off"
+    }
   }
 }
