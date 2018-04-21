@@ -65,6 +65,9 @@ const resolve = (story) => {
           }
           endChapter[endChapter.length - 1]++
           storyLine = endChapter
+          while (choice.length + 1 > storyLine.length) {
+            choice.pop()
+          }
           chapterName = `_${storyLine.join(`_`)}`
           if (result[chapterName] === undefined) {
             result[chapterName] = [{
