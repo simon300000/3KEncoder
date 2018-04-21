@@ -10,13 +10,18 @@ const resolve = (story) => {
   let storyLine = [0]
   let choice = []
   for (let i = 0; i < story.length; i++) {
+    let line = story[i]
+    if (line[0] !== `>`) {
+      if (storyLine.length > 1) {
+        storyLine = [storyLine[0] + 1]
+      }
+    }
     let chapterName = `_${storyLine.join(`_`)}`
     if (result[chapterName] === undefined) {
       result[chapterName] = [{
         mark: chapterName
       }]
     }
-    let line = story[i]
     if (line[0] !== `>`) {
       if (storyLine.length > 1) {
         storyLine = [storyLine[0] + 1]
@@ -37,6 +42,7 @@ const resolve = (story) => {
           result[chapterName].push({
             choice: {}
           })
+          result[chapterName + `_e`] = []
         } else {
           storyLine[(stringOccurrence(line, `> `) + 1) / 2]++
         }
@@ -46,10 +52,13 @@ const resolve = (story) => {
           choice.pop()
         }
       } else {
+        let occurrence = stringOccurrence(line, `> `)
         while (stringOccurrence(line, `> `)) {
           line = line.replace(`> `, ``)
         }
-        result[chapterName].push(analyzeLine(line))
+        if ((occurrence + 2) / 2 === storyLine.length) {
+          result[chapterName].push(analyzeLine(line))
+        } else {}
       }
     }
   }
