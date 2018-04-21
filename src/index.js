@@ -84,6 +84,9 @@ const analyzeLine = line => {
     line = line.replace(`[`, ``)
     line = line.split(`]`)
     let obj = {}
+    if (line[1] === ``) {
+      line[1] = true
+    }
     obj[line[0]] = line[1]
     return obj
   } else {
