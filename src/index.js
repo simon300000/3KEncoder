@@ -52,11 +52,11 @@ const resolve = (story) => {
           choice.pop()
         }
       } else {
-        let occurrence = stringOccurrence(line, `> `)
+        let occurrence = (stringOccurrence(line, `> `) + 2) / 2
         while (stringOccurrence(line, `> `)) {
           line = line.replace(`> `, ``)
         }
-        if ((occurrence + 2) / 2 === storyLine.length) {
+        if (occurrence === storyLine.length) {
           result[chapterName].push(analyzeLine(line))
         } else {}
       }
