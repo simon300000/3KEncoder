@@ -14,6 +14,12 @@ const resolve = (story) => {
     if (line[0] !== `>`) {
       if (storyLine.length > 1) {
         storyLine = [storyLine[0] + 1]
+        if (result[`_${storyLine.join(`_`)}`] === undefined) {
+          result[`_${storyLine.join(`_`)}`] = [{
+            afterChoice: true,
+            mark: `_${storyLine.join(`_`)}`
+          }]
+        }
       }
     }
     let chapterName = `_${storyLine.join(`_`)}`
@@ -68,6 +74,7 @@ const resolve = (story) => {
           chapterName = `_${storyLine.join(`_`)}`
           if (result[chapterName] === undefined) {
             result[chapterName] = [{
+              afterChoice: true,
               mark: chapterName
             }]
           }
