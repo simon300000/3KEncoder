@@ -17,8 +17,7 @@
   },
   "homepage": "https://github.com/simon300000/3KEncoder#readme",
   "dependencies": {
-    "level": "^3.0.0",
-    "replace-string": "^1.1.0"
+    "level": "^3.0.0"
   },
   "eslintConfig": {
     "root": true,
