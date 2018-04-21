@@ -1,6 +1,14 @@
 const trimTrailingLines = require('trim-trailing-lines')
 const splitLines = require('split-lines')
 
+const resolve = (story) => {
+  let result = []
+  for (let i = 0; i < story.length; i++) {
+    console.log(story[i])
+  }
+  return result
+}
+
 module.exports = (string) => {
   if (typeof string !== 'string') {
     string = String(string)
@@ -12,5 +20,5 @@ module.exports = (string) => {
   for (let i = 0; i < lines; i++) {
     story.push(input[i * 2])
   }
-  console.log(story)
+  console.log(resolve(story))
 }
