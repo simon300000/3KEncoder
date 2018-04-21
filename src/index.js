@@ -23,9 +23,6 @@ const resolve = (story) => {
       }]
     }
     if (line[0] !== `>`) {
-      if (storyLine.length > 1) {
-        storyLine = [storyLine[0] + 1]
-      }
       result[chapterName].push(analyzeLine(line))
     } else {
       if (isOdd(stringOccurrence(line, `> `))) {
