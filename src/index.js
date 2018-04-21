@@ -47,9 +47,10 @@ const resolve = (story) => {
           storyLine[(stringOccurrence(line, `> `) + 1) / 2]++
         }
         result[choice[storyLine.length - 2]][result[choice[storyLine.length - 2]].length - 1].choice[choiceName] = `_${storyLine.join(`_`)}`
-        // if (storyLine[stringOccurrence(line, `> `) + 1] !== undefined) {
-        //   storyLine.pop()
-        // }
+        if (storyLine[(stringOccurrence(line, `> `) + 3) / 2] !== undefined) {
+          storyLine.pop()
+          choice.pop()
+        }
       } else {
 
       }
