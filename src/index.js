@@ -83,6 +83,38 @@ const resolve = (story) => {
       }
     }
   }
+  for (let chapter in result) {
+    let last = result[chapter][result[chapter].length - 1]
+    if (last.choice) {
+      for (let choice in last.choice) {
+        let choiceChaper = result[last.choice[choice]][result[last.choice[choice]].length - 1]
+        if (!choiceChaper.go && !choiceChaper.choice && !choiceChaper.end) {
+          // last.choice[choice]
+          let choiceChaperId = last.choice[choice].split('_')
+          choiceChaperId.shift()
+          while (!result[`_${choiceChaperId.join(`_`)}`].afterChoice) {
+            choiceChaperId[choiceChaperId.length - 1]++
+            while (result[`_${choiceChaperId.join(`_`)}`] === undefined) {
+              choiceChaperId.pop()
+              choiceChaperId[choiceChaperId.length - 1]++
+              if (choiceChaperId.length === 1) {
+                break
+              }
+            }
+            if (choiceChaperId.length === 1) {
+              break
+            }
+          }
+          result[last.choice[choice]].push({
+            go: `_${choiceChaperId.join(`_`)}`
+          })
+        }
+      }
+    }
+    if (!last.go && !last.choice && !last.end) {
+      throw new Error(`no where to go at ${result[chapter]}`)
+    }
+  }
   return result
 }
 
