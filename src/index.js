@@ -26,6 +26,9 @@ const resolve = (story) => {
         while (stringOccurrence(choiceName, `> `)) {
           choiceName = choiceName.replace(`> `, ``)
         }
+        while ((stringOccurrence(line, `> `) + 3) / 2 < storyLine.length) {
+          storyLine.pop()
+        }
         if (storyLine[(stringOccurrence(line, `> `) + 1) / 2] === undefined) {
           choice.push(chapterName)
           storyLine[(stringOccurrence(line, `> `) + 1) / 2] = 0
