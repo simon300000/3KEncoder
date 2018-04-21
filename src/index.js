@@ -19,18 +19,7 @@ const resolve = (story) => {
       if (storyLine.length > 1) {
         storyLine = [storyLine[0] + 1]
       }
-      if (line[0] === `[`) {
-        line = line.replace(`[`, ``)
-        line = line.split(`]`)
-        let obj = {}
-        obj[line[0]] = line[1]
-        result[chapterName].push(obj)
-      } else {
-        line = line.split(`:`)
-        result[chapterName].push({
-          speech: line
-        })
-      }
+      result[chapterName].push(analyzeLine(line))
     } else {
       if (isOdd(stringOccurrence(line, `> `))) {
         let choiceName = line.replace(`[if]`, ``)
@@ -55,10 +44,27 @@ const resolve = (story) => {
         while (stringOccurrence(line, `> `)) {
           line = line.replace(`> `, ``)
         }
+        result[chapterName].push(analyzeLine(line))
       }
     }
   }
   return result
+}
+
+const analyzeLine = line => {
+  if (line[0] === `[`) {
+    line = line.replace(`[`, ``)
+    line = line.split(`]`)
+    let obj = {}
+    obj[line[0]] = line[1]
+    return obj
+  } else {
+    line = line.split(`:`)
+    let obj = {
+      speech: line
+    }
+    return obj
+  }
 }
 
 module.exports = (string) => {
