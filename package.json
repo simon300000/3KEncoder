@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/simon300000/3KEncoder/issues"
   },
-  "homepage": "https://github.com/simon300000/3KEncoder#readme"
+  "homepage": "https://github.com/simon300000/3KEncoder#readme",
+  "dependencies": {
+    "level": "^3.0.0"
+  }
 }
