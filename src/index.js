@@ -148,5 +148,5 @@ module.exports = (string) => {
   for (let i = 0; i < lines; i++) {
     story.push(input[i * 2])
   }
-  console.log(resolve(story))
+  return resolve(story)
 }
