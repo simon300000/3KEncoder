@@ -3,8 +3,6 @@ const splitLines = require('split-lines')
 const stringOccurrence = require('string-occurrence')
 const isOdd = require('is-odd')
 
-// not maintain!
-
 const resolve = (story) => {
   let result = {}
   let storyLine = [0]
