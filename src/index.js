@@ -1,7 +1,92 @@
 const trimTrailingLines = require('trim-trailing-lines')
+/**
+Remove final newline characters from `value`.
+
+Parameters
+- `value` (`string`) — Value with trailing newlines, coerced to string.
+
+Returns:
+`string` — Value without trailing newlines.
+
+
+Example:
+  var trimTrailingLines = require('trim-trailing-lines')
+
+  trimTrailingLines('foo\nbar') // => 'foo\nbar'
+  trimTrailingLines('foo\nbar\n') // => 'foo\nbar'
+  trimTrailingLines('foo\nbar\n\n') // => 'foo\nbar'
+ */
+
 const splitLines = require('split-lines')
+/**
+splitLines(input, [options])
+
+input
+  Type: `string`
+    - String to split.
+
+options
+  Type: `Object`
+
+preserveNewlines
+  Type: `boolean`<br>
+  Default: `false`
+
+Preserve the line separator at the end of every line, except the last line, which will never contain one.
+
+
+Example:
+const splitLines = require('split-lines');
+
+splitLines('foo\r\nbar\r\nbaz\nrainbow');
+//=> ['foo', 'bar', 'baz', 'rainbow']
+
+splitLines('foo\r\nbar\r\nbaz\nrainbow', {preserveNewlines: true});
+//=> ['foo\r\n', 'bar\r\n', 'baz\n', 'rainbow']
+ */
+
 const stringOccurrence = require('string-occurrence')
+/**
+stringOccurrence(input, search, [options])
+
+input
+Type: `string` = The string to search in.
+
+search
+Type: `string`, `string[]` = The keyword or keywords to search for.
+
+options
+  - caseInsensitive
+    Type: `boolean`
+    Default: `true`
+
+Perform a case insensitive match.
+
+Example:
+const stringOccurrence = require('string-occurrence');
+
+stringOccurrence('foo bar', 'foo');
+//=> 1
+
+stringOccurrence('foo bar\nfoo baz', 'foo');
+//=> 2
+
+stringOccurrence('foo bar\nfoo baz', ['foo', 'baz']);
+//=> 3
+ */
+
 const isOdd = require('is-odd')
+/**
+Example:
+const isOdd = require('is-odd');
+
+console.log(isOdd('1')); //=> true
+console.log(isOdd('3')); //=> true
+
+console.log(isOdd(0)); //=> false
+console.log(isOdd(2)); //=> false
+*/
+
 
 /**
  * Parse the array input
@@ -9,6 +94,8 @@ const isOdd = require('is-odd')
  * @param  {Array} story The array form of raw story
  * @return {Object}      The object after parsing the array
  */
+
+
 const resolve = story => {
   let result = {}
   let storyLine = [0]
@@ -17,9 +104,12 @@ const resolve = story => {
   for (let i = 0; i < story.length; i++) {
     let line = story[i]
 
+    // If the line does not start with '>' in markdown.
     if (line[0] !== `>`) {
 
+      // ?
       if (storyLine.length > 1) {
+
         storyLine = [storyLine[0] + 1]
 
         if (result[`_${storyLine.join(`_`)}`] === undefined) {
@@ -31,8 +121,10 @@ const resolve = story => {
         }
       }
     }
+
     let chapterName = `_${storyLine.join(`_`)}`
 
+    // If the return value of arry result is not defined.
     if (result[chapterName] === undefined) {
       result[chapterName] =
       [{
@@ -197,7 +289,7 @@ module.exports = string => {
   let lines = Math.ceil(input.length / 2)
   // Since we don't need blank lines, the amount of lines is halfed
   let story = []
-  
+
   for (let i = 0; i < lines; i++) {
     story.push(input[i * 2])
     // produce the array without blank lines
