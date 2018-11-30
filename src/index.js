@@ -3,6 +3,12 @@ const splitLines = require('split-lines')
 const stringOccurrence = require('string-occurrence')
 const isOdd = require('is-odd')
 
+/**
+ * Parse the array input
+ * @method resolve
+ * @param  {Array} story The array form of raw story
+ * @return {Object}      The object after parsing the array
+ */
 const resolve = story => {
   let result = {}
   let storyLine = [0]
@@ -135,16 +141,28 @@ const analyzeLine = line => {
   }
 }
 
+/**
+ * This is the entry of the function that parse the markdown file,
+ * A raw string parser, parse string to array and pass to analyzer.
+ * @method exports
+ * @param  {String} string The Markdown file as string
+ * @return {Object}        The object after parsing the markdown file
+ */
 module.exports = string => {
   if (typeof string !== 'string') {
     string = String(string)
+    // If the input is something like a blob, make it string
   }
   string = trimTrailingLines(string)
+  // Trim blank lines that might be at the end of markdown file
   let input = splitLines(string)
+  // Produce a array of each line
   let lines = Math.ceil(input.length / 2)
+  // Since we don't need blank lines, the amount of lines is halfed
   let story = []
   for (let i = 0; i < lines; i++) {
     story.push(input[i * 2])
+    // produce the array without blank lines
   }
   return resolve(story)
 }
