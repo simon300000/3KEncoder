@@ -3,7 +3,7 @@ const splitLines = require('split-lines')
 const stringOccurrence = require('string-occurrence')
 const isOdd = require('is-odd')
 
-const resolve = (story) => {
+const resolve = story => {
   let result = {}
   let storyLine = [0]
   let choice = []
@@ -135,8 +135,8 @@ const analyzeLine = line => {
   }
 }
 
-module.exports = (string) => {
-  if (typeof string !== `string`) {
+module.exports = string => {
+  if (typeof string !== 'string') {
     string = String(string)
   }
   string = trimTrailingLines(string)
