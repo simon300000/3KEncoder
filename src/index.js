@@ -1,9 +1,7 @@
 const trimTrailingLines = require('trim-trailing-lines')
 
 const splitLines = require('split-lines')
-
 const stringOccurrence = require('string-occurrence')
-
 const isOdd = require('is-odd')
 
 /**
@@ -22,14 +20,9 @@ const resolve = story => {
   for (let i = 0; i < story.length; i++) {
     let line = story[i]
 
-    // If the line does not start with '>' in markdown.
     if (line[0] !== `>`) {
-
-      // ?
       if (storyLine.length > 1) {
-
         storyLine = [storyLine[0] + 1]
-
         if (result[`_${storyLine.join(`_`)}`] === undefined) {
           result[`_${storyLine.join(`_`)}`] =
           [{
